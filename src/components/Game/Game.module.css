@@ -1,0 +1,16 @@
+.GameContainer {
+    margin-top: 5%;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: left;
+    padding: 10px;
+}
