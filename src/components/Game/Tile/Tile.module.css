@@ -4,3 +4,10 @@
     background-color: white;
     border-radius: 5px;
 }
+
+.RandomTile {
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    border-radius: 5px;
+}

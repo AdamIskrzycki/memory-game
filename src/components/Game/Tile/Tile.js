@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classes from './Tile.module.css';
 
-class Tile extends Component {
-    render() {
-        return <div className={classes.Tile}></div>
-    }
+const Tile = (props) => {
+
+    const random = Math.floor(Math.random() * props.tiles.length);
+    
+    return <div className={random > 4 ? classes.Tile : classes.RandomTile}></div>
 }
 
 export default Tile;

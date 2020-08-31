@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="white" align="center">
+    <Typography variant="body2" align="center">
       {"Copyright © "}
       <span color="inherit">
         Memory Game
@@ -33,7 +33,6 @@ const Footer = () => {
       <Typography
         variant="subtitle1"
         align="center"
-        color="white"
         component="p"
       >
         For any questions feel free to contact us on memory-game@gmail.com!
