@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import classes from './HomePage.module.css';
 import Rules from './Rules/Rules';
-import RepresentativeBox from './RepresentativeBox/RepresentativeBox';
+import TitleBox from './TitleBox/TitleBox';
 
 class HomePage extends Component {
     render() {
         return (
             <main className={classes.HomePageContainer}>
-                <RepresentativeBox />
+                <TitleBox />
                 <Rules />
             </main>
         )

@@ -1,11 +1,11 @@
 import React from 'react';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import { IconButton } from '@material-ui/core';
-import Title from '../Title/Title';
-import classes from './RepresentativeBox.module.css';
+import Title from './Title/Title';
+import classes from './TitleBox.module.css';
 import { Link } from 'react-router-dom';
 
-const RepresentativeBox = () => {
+const TitleBox = () => {
 
     const iconStyles = {
         fontSize: '150px',
@@ -14,7 +14,7 @@ const RepresentativeBox = () => {
     }
 
     return (
-        <article className={classes.RepresentativeBox}>
+        <article className={classes.TitleBox}>
             <Title />
             <IconButton component={Link} to='/game'>
                 <PlayCircleFilledIcon style={iconStyles} />
@@ -23,4 +23,4 @@ const RepresentativeBox = () => {
     )
 }
 
-export default RepresentativeBox;
+export default TitleBox;

@@ -9,7 +9,8 @@ import _ from 'lodash';
 class Game extends Component {
 
     state = {
-        hasGameStarted: false
+        renderingRandomTiles: false,
+        isPlayerChoosing: false
     }
 
     render() {
@@ -25,8 +26,10 @@ class Game extends Component {
         const easyModeTiles = [];
 
         const gameStartHandler = () => {
-            setTimeout(() => { this.setState({ hasGameStarted: true }) }, 250)
-            setTimeout(() => { this.setState({ hasGameStarted: false }) }, 750)
+            setTimeout(() => { this.setState({ renderingRandomTiles: true }) }, 250)
+            setTimeout(() => {
+                this.setState({ renderingRandomTiles: false, isPlayerChoosing: true })
+            }, 750)
         }
 
         return (
@@ -38,7 +41,7 @@ class Game extends Component {
                 </nav>
                 <main className={classes.GameContainer}>
                     {easyMode.map((index) => {
-                        easyModeTiles.push(<Tile key={index} random={this.state.hasGameStarted ? Math.floor(Math.random() * 2) : 0} />)
+                        easyModeTiles.push(<Tile key={index} random={this.state.renderingRandomTiles ? Math.floor(Math.random() * 2) : 0} choosing={this.state.isPlayerChoosing} />)
                     })}
                     {/* {console.log(Math.floor(Math.random() * easyModeTiles.length))} */}
                     {easyModeTiles}
