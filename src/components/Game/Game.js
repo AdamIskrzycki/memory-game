@@ -10,11 +10,31 @@ class Game extends Component {
 
     state = {
         renderingRandomTiles: false,
-        isPlayerChoosing: false
+        isPlayerChoosing: false,
+        randomTiles: []
+    }
+
+    // shouldComponentUpdate(nextProps) {
+    //     const renderingTiles = this.props.renderingRandomTiles !== nextProps.renderingRandomTiles;
+    //     const isChoosing = this.props.isPlayerChoosing !== nextProps.isPlayerChoosing
+    //     return renderingTiles || isChoosing;
+    // }
+
+
+    generateRandomTile = (array) => {
+
+        let random = Math.random();
+        let newArray = []
+
+        if (random > .5) {
+            newArray = [...array, random];
+            console.log('new array: ', newArray);
+        }
+
+        return newArray;
     }
 
     render() {
-
 
         const iconStyles = {
             fontSize: '50px',
@@ -22,11 +42,13 @@ class Game extends Component {
             color: 'white',
         }
 
-        const easyMode = _.range(16);
+        const easyModeBoardSize = _.range(16);
         const easyModeTiles = [];
 
         const gameStartHandler = () => {
-            setTimeout(() => { this.setState({ renderingRandomTiles: true }) }, 250)
+            setTimeout(() => {
+                this.setState({ renderingRandomTiles: true })
+            }, 250)
             setTimeout(() => {
                 this.setState({ renderingRandomTiles: false, isPlayerChoosing: true })
             }, 750)
@@ -40,13 +62,15 @@ class Game extends Component {
                     </IconButton>
                 </nav>
                 <main className={classes.GameContainer}>
-                    {easyMode.map((index) => {
-                        easyModeTiles.push(<Tile key={index} random={this.state.renderingRandomTiles ? Math.floor(Math.random() * 2) : 0} choosing={this.state.isPlayerChoosing} />)
+                    {easyModeBoardSize.map((index) => {
+                        return easyModeTiles.concat(<Tile
+                            key={index}
+                            random={this.state.renderingRandomTiles ? this.generateRandomTile(this.state.randomTiles) : 0}
+                            choosing={this.state.isPlayerChoosing} />)
                     })}
-                    {/* {console.log(Math.floor(Math.random() * easyModeTiles.length))} */}
-                    {easyModeTiles}
+                    {console.log('state: ', this.state)}
                 </main>
-                <button className={classes.PlayButton} onClick={gameStartHandler} >Play</button>
+                <button className={classes.PlayButton} onClick={gameStartHandler}>Play</button>
             </>
         )
     }

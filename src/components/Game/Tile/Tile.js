@@ -4,7 +4,9 @@ import classes from './Tile.module.css';
 const Tile = (props) => {
 
     const handleStyleChangeClick = e => {
-        e.target.style.backgroundColor = 'yellow';
+        if (e.target.style.backgroundColor === 'yellow')
+            e.target.style.backgroundColor = 'white';
+        else e.target.style.backgroundColor = 'yellow';
     }
 
     const handleStyleChangeHover = e => {
@@ -12,7 +14,7 @@ const Tile = (props) => {
     }
 
     return <div
-        className={props.random === 0 ? classes.Tile : classes.RandomTile}
+        className={props.random <= .5 ? classes.Tile : classes.RandomTile}
         onClick={props.choosing ? handleStyleChangeClick : null}
         onMouseOver={props.choosing ? handleStyleChangeHover : null}
     ></div>
