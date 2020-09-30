@@ -11,29 +11,9 @@ class Game extends Component {
     state = {
         renderingRandomTiles: false,
         isPlayerChoosing: false,
-        randomTiles: []
+        randomTiles: [],
+        userTiles: []
     }
-
-    // shouldComponentUpdate(nextProps) {
-    //     const renderingTiles = this.props.renderingRandomTiles !== nextProps.renderingRandomTiles;
-    //     const isChoosing = this.props.isPlayerChoosing !== nextProps.isPlayerChoosing
-    //     return renderingTiles || isChoosing;
-    // }
-
-
-    generateRandomTile = (array) => {
-
-        let random = Math.random();
-        let newArray = []
-
-        if (random > .5) {
-            newArray = [...array, random];
-            console.log('new array: ', newArray);
-        }
-
-        return newArray;
-    }
-
     render() {
 
         const iconStyles = {
@@ -63,12 +43,17 @@ class Game extends Component {
                 </nav>
                 <main className={classes.GameContainer}>
                     {easyModeBoardSize.map((index) => {
+
+                        let random = Math.random();
+
                         return easyModeTiles.concat(<Tile
+                            index={index}
                             key={index}
-                            random={this.state.renderingRandomTiles ? this.generateRandomTile(this.state.randomTiles) : 0}
-                            choosing={this.state.isPlayerChoosing} />)
+                            randomNumber={random}
+                            choosing={this.state.isPlayerChoosing}
+                            userTiles={this.state.userTiles} />)
                     })}
-                    {console.log('state: ', this.state)}
+                    {/* {console.log('randomTiles: ', this.state.randomTiles)} */}
                 </main>
                 <button className={classes.PlayButton} onClick={gameStartHandler}>Play</button>
             </>
