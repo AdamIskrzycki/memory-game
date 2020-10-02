@@ -6,12 +6,12 @@ class Tile extends Component {
     render() {
         const handleStyleChangeClick = e => {
             // const newArray = [...this.props.userTiles]
-            // newArray.push(this.props.index);
+            // newArray.push(this.props.index);     // avoiding mutation? (seems to not be working)
 
-            this.props.userTiles.push(this.props.index);
+            this.props.userTiles.push(this.props.index);    // mutating the state?
 
             console.log('index: ', this.props.index)
-            console.log('random number: ', this.props.randomTile)
+            console.log('random number: ', this.props.randomNumber)
             console.log('userTiles: ', this.props.userTiles)
 
             if (e.target.style.backgroundColor === 'yellow')

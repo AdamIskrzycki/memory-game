@@ -46,6 +46,10 @@ class Game extends Component {
 
                         let random = Math.random();
 
+                        if(random > .5) {
+                            this.state.randomTiles.push(index);     // mutating the state?
+                        }
+
                         return easyModeTiles.concat(<Tile
                             index={index}
                             key={index}
@@ -53,7 +57,7 @@ class Game extends Component {
                             choosing={this.state.isPlayerChoosing}
                             userTiles={this.state.userTiles} />)
                     })}
-                    {/* {console.log('randomTiles: ', this.state.randomTiles)} */}
+                    {console.log('randomTiles: ', this.state.randomTiles)}
                 </main>
                 <button className={classes.PlayButton} onClick={gameStartHandler}>Play</button>
             </>
