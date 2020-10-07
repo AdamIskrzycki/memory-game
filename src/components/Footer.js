@@ -8,13 +8,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     left: '0',
     bottom: '0',
-    width: '100%'
+    width: '100%',
   }
 }));
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="white" align="center">
+    <Typography variant="body2" align="center">
       {"Copyright © "}
       <span color="inherit">
         Memory Game
@@ -33,7 +33,6 @@ const Footer = () => {
       <Typography
         variant="subtitle1"
         align="center"
-        color="white"
         component="p"
       >
         For any questions feel free to contact us on memory-game@gmail.com!

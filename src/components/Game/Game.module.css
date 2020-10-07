@@ -1,0 +1,35 @@
+.GameContainer {
+    margin-top: 5%;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: left;
+    padding: 10px;
+}
+
+.HomeButton {
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.PlayButton {
+    width: 130px;
+    margin-top: 50px;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+}
