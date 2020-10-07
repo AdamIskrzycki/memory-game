@@ -1,35 +1,19 @@
-import React, { Component } from 'react';
-import classes from './Tile.module.css';
+import React, { Component } from "react";
+import classes from "./Tile.module.css";
 
 class Tile extends Component {
+  render() {
+    const handleStyleChangeHover = (e) => {
+      e.target.style.cursor = "pointer";
+    };
 
-    render() {
-        const handleStyleChangeClick = e => {
-            // const newArray = [...this.props.userTiles]
-            // newArray.push(this.props.index);     // avoiding mutation? (seems to not be working)
-
-            this.props.userTiles.push(this.props.index);    // mutating the state?
-
-            console.log('index: ', this.props.index)
-            console.log('random number: ', this.props.randomNumber)
-            console.log('userTiles: ', this.props.userTiles)
-
-            if (e.target.style.backgroundColor === 'yellow')
-                e.target.style.backgroundColor = 'white';
-            else e.target.style.backgroundColor = 'yellow';
-        }
-
-        const handleStyleChangeHover = e => {
-            e.target.style.cursor = 'pointer';
-        }
-
-
-        return <div
-            className={this.props.randomNumber <= .5 ? classes.Tile : classes.RandomTile}
-            onClick={this.props.choosing ? handleStyleChangeClick : null}
-            onMouseOver={this.props.choosing ? handleStyleChangeHover : null}
-        ></div>
-    }
+    return (
+      <div
+        className={this.props.isHighlighted ? classes.RandomTile : classes.Tile}
+        onClick={this.props.onTileClick ? this.props.onTileClick : null}
+        onMouseOver={this.props.onTileClick ? handleStyleChangeHover : null}
+      ></div>
+    );
+  }
 }
 export default Tile;
-
