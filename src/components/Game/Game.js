@@ -7,6 +7,7 @@ import { IconButton } from "@material-ui/core";
 import _ from "lodash";
 
 class Game extends Component {
+
   numberOfTiles = 16;
 
   state = {
@@ -14,6 +15,7 @@ class Game extends Component {
     isPlayerChoosing: false,
     randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
     userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
+    hasPlayerWon: false
   };
 
   render() {
@@ -28,7 +30,6 @@ class Game extends Component {
       const array = _.range(this.numberOfTiles).map(
         (x) => (x = _.sample([true, false]))
       );
-      console.log("array: ", array);
       this.setState({ randomTiles: array });
       setTimeout(() => {
         this.setState({ renderingRandomTiles: true });
@@ -39,20 +40,15 @@ class Game extends Component {
     };
 
     const onTileClick = (index) => {
-      console.log("index", index);
-      console.log("userTiles: ", this.state.userTiles);
-
       const newUserTiles = [...this.state.userTiles];
 
-      if (newUserTiles[index] === false) {
-        newUserTiles[index] = true;
-      } else newUserTiles[index] = false;
-
-      if (_.isEqual(newUserTiles, this.state.randomTiles)) {
-        console.log("you won");
-      }
+      newUserTiles[index] ? newUserTiles[index] = false : newUserTiles[index] = true
 
       this.setState({ userTiles: newUserTiles });
+
+      if (_.isEqual(newUserTiles, this.state.randomTiles)) {
+        this.setState({hasPlayerWon: true})
+      }
     };
 
     return (
@@ -78,9 +74,8 @@ class Game extends Component {
                   <Tile isHighlighted={tile} key={index} />
                 );
               })}
-          {console.log("randomTiles: ", this.state.randomTiles)}
-          {console.log("userTiles: ", this.state.userTiles)}
         </main>
+        {this.state.hasPlayerWon ? <p className={classes.YouWon}>YOU WON !!!</p> : null}
         <button className={classes.PlayButton} onClick={gameStartHandler}>
           Play
         </button>
