@@ -72,7 +72,8 @@ class Game extends Component {
       this.setState({ userTiles: newUserTiles });
 
       if (_.isEqual(newUserTiles, this.state.randomTiles)) {
-        this.setState({ openModal: true })
+        this.setState({ openModal: true})
+        resetTimer()
       }
     };
 
@@ -81,7 +82,9 @@ class Game extends Component {
         openModal: false,
         randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
         userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
-        isPlayerChoosing: false
+        isPlayerChoosing: false,
+        seconds: 0,
+        isActive: false
       })
     }
 
@@ -111,7 +114,7 @@ class Game extends Component {
               );
             })}
         </main>
-        {this.state.openModal ? <Modal handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
+        {this.state.openModal ? <Modal seconds={this.state.seconds} handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
         <button className={classes.PlayButton} onClick={gameStartHandler}>
           Play
         </button>
