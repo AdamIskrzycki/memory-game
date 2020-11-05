@@ -18,7 +18,7 @@ const Modal = (props) => {
         </DialogTitle>
         <DialogContent dividers>
             <p className={classes.congratulations}>Congratulations, you won!</p>
-            <p>It took you {props.seconds} seconds</p>
+            <p>It took you {props.time} seconds</p>
         </DialogContent>
         <DialogActions>
             <Button autoFocus color="primary" onClick={props.handleClose}>

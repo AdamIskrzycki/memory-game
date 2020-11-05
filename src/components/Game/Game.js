@@ -56,6 +56,10 @@ class Game extends Component {
         if (this.state.isActive) {
           interval = setInterval(() => {
             this.setState({ seconds: this.state.seconds + 1 });
+            if (_.isEqual(this.state.userTiles, this.state.randomTiles)) {
+              this.setState({ openModal: true})
+              clearInterval(interval)
+            }
           }, 1000);
         } else if (!this.state.isActive && this.state.seconds !== 0) {
           clearInterval(interval);
@@ -71,10 +75,9 @@ class Game extends Component {
 
       this.setState({ userTiles: newUserTiles });
 
-      if (_.isEqual(newUserTiles, this.state.randomTiles)) {
-        this.setState({ openModal: true})
-        resetTimer()
-      }
+      // if (_.isEqual(newUserTiles, this.state.randomTiles)) {
+      //   this.setState({ openModal: true})
+      // }
     };
 
     const handleModalClose = () => {
@@ -114,7 +117,7 @@ class Game extends Component {
               );
             })}
         </main>
-        {this.state.openModal ? <Modal seconds={this.state.seconds} handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
+        {this.state.openModal ? <Modal time={this.state.seconds} handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
         <button className={classes.PlayButton} onClick={gameStartHandler}>
           Play
         </button>
