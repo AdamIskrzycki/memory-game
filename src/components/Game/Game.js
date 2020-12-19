@@ -6,7 +6,6 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { IconButton } from "@material-ui/core";
 import _ from "lodash";
 import Modal from './Modal/Modal';
-import Timer from './Timer/Timer';
 
 class Game extends Component {
 
@@ -28,7 +27,7 @@ class Game extends Component {
       cursor: "pointer",
       color: "white",
     };
-    const easyModeTiles = [];
+    const tiles = [];
 
     const gameStartHandler = () => {
       const array = _.range(this.numberOfTiles).map(
@@ -52,9 +51,7 @@ class Game extends Component {
       newUserTiles[index] ? newUserTiles[index] = false : newUserTiles[index] = true
 
       this.setState({ userTiles: newUserTiles });
-      console.log('userTiles', this.state.userTiles)
-      console.log('randomTiles', this.state.randomTiles)
-      
+ 
       if (_.isEqual(newUserTiles, this.state.randomTiles)) {
         this.setState({ openModal: true, endTime: new Date()})
       }
@@ -80,7 +77,7 @@ class Game extends Component {
         <main className={classes.GameContainer}>
           {this.state.isPlayerChoosing
             ? this.state.userTiles.map((tile, index) => {
-              return easyModeTiles.concat(
+              return tiles.concat(
                 <Tile
                   isHighlighted={tile}
                   key={index}
@@ -89,7 +86,7 @@ class Game extends Component {
               );
             })
             : this.state.randomTiles.map((tile, index) => {
-              return easyModeTiles.concat(
+              return tiles.concat(
                 <Tile isHighlighted={tile} key={index} />
               );
             })}
