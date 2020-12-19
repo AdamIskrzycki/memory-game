@@ -6,7 +6,6 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { IconButton } from "@material-ui/core";
 import _ from "lodash";
 import Modal from './Modal/Modal';
-import Timer from './Timer/Timer';
 
 class Game extends Component {
 
@@ -18,8 +17,8 @@ class Game extends Component {
     randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
     userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
     openModal: false,
-    seconds: 0,
-    isActive: false
+    startTime: null,
+    endTime: null,
   };
 
   render() {
@@ -28,43 +27,21 @@ class Game extends Component {
       cursor: "pointer",
       color: "white",
     };
-    const easyModeTiles = [];
-
-    const toggleTimer = () => {
-      this.setState({ isActive: !this.state.isActive });
-    }
-
-    const resetTimer = () => {
-      this.setState({ seconds: 0, isActive: false });
-    }
+    const tiles = [];
 
     const gameStartHandler = () => {
-      toggleTimer();
       const array = _.range(this.numberOfTiles).map(
         (x) => (x = _.sample([true, false]))
       );
-      
+
       this.setState({ randomTiles: array });
-      
+
       setTimeout(() => {
         this.setState({ renderingRandomTiles: true });
       }, 250);
 
       setTimeout(() => {
-        this.setState({ renderingRandomTiles: false, isPlayerChoosing: true });
-        let interval = null;
-        if (this.state.isActive) {
-          interval = setInterval(() => {
-            this.setState({ seconds: this.state.seconds + 1 });
-            if (_.isEqual(this.state.userTiles, this.state.randomTiles)) {
-              this.setState({ openModal: true})
-              clearInterval(interval)
-            }
-          }, 1000);
-        } else if (!this.state.isActive && this.state.seconds !== 0) {
-          clearInterval(interval);
-        }
-        return () => clearInterval(interval);
+        this.setState({ renderingRandomTiles: false, isPlayerChoosing: true, startTime: new Date() });
       }, 750);
     };
 
@@ -74,10 +51,11 @@ class Game extends Component {
       newUserTiles[index] ? newUserTiles[index] = false : newUserTiles[index] = true
 
       this.setState({ userTiles: newUserTiles });
+ 
+      if (_.isEqual(newUserTiles, this.state.randomTiles)) {
+        this.setState({ openModal: true, endTime: new Date()})
+      }
 
-      // if (_.isEqual(newUserTiles, this.state.randomTiles)) {
-      //   this.setState({ openModal: true})
-      // }
     };
 
     const handleModalClose = () => {
@@ -86,12 +64,8 @@ class Game extends Component {
         randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
         userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
         isPlayerChoosing: false,
-        seconds: 0,
-        isActive: false
       })
     }
-
-
 
     return (
       <>
@@ -103,7 +77,7 @@ class Game extends Component {
         <main className={classes.GameContainer}>
           {this.state.isPlayerChoosing
             ? this.state.userTiles.map((tile, index) => {
-              return easyModeTiles.concat(
+              return tiles.concat(
                 <Tile
                   isHighlighted={tile}
                   key={index}
@@ -112,18 +86,15 @@ class Game extends Component {
               );
             })
             : this.state.randomTiles.map((tile, index) => {
-              return easyModeTiles.concat(
+              return tiles.concat(
                 <Tile isHighlighted={tile} key={index} />
               );
             })}
         </main>
-        {this.state.openModal ? <Modal time={this.state.seconds} handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
+        {this.state.openModal ? <Modal time={this.state.endTime - this.state.startTime} handleClose={handleModalClose} openModal={this.state.openModal} /> : null}
         <button className={classes.PlayButton} onClick={gameStartHandler}>
           Play
         </button>
-        <div className="time">
-          {this.state.seconds}s
-        </div>
       </>
     );
   }
