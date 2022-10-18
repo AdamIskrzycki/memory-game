@@ -5,3 +5,9 @@
     padding: 10px;
     margin-bottom: 50px;
 }
+
+@media (max-width: 1000px) {
+    .Title {
+        font-size: 35px;
+    }
+}

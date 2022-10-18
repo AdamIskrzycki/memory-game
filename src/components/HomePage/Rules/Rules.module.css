@@ -11,3 +11,17 @@
     margin-top: 40px;
     font-size: 20px;
 }
+
+@media (max-width: 1000px) {
+    .RulesContainer {
+        width: 90%;
+    }
+
+    .Header {
+        font-size: 40px;
+    }
+
+    .Rules {
+        font-size: 18px;
+    }
+}

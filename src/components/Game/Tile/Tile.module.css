@@ -13,3 +13,13 @@
     background-color: yellow;
     border-radius: 5px;
 }
+
+/* @media (max-width: 550px) {
+    .Tile {
+        width: 25%;
+    }
+
+    .RandomTile {
+        width: 25%;
+    }
+} */
