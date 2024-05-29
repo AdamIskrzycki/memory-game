@@ -103,6 +103,9 @@ class Game extends Component {
         <button className={classes.PlayButton} onClick={gameStartHandler}>
           Play
         </button>
+        <button className={classes.PlayButton} onClick={handleModalClose}>
+          Reset
+        </button>
       </>
     );
   }
