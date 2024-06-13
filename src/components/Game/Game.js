@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import classes from "./Game.module.css";
-import { Link } from "react-router-dom";
 import Tile from "../Game/Tile/Tile";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { IconButton } from "@material-ui/core";
 import _ from "lodash";
 import Modal from "./Modal/Modal";
+import Nav from '../Nav/Nav'
 
 class Game extends Component {
   numberOfTiles = 16;
@@ -21,11 +19,7 @@ class Game extends Component {
   };
 
   render() {
-    const iconStyles = {
-      fontSize: "50px",
-      cursor: "pointer",
-      color: "white",
-    };
+    
     const tiles = [];
 
     const gameStartHandler = () => {
@@ -73,11 +67,7 @@ class Game extends Component {
 
     return (
       <>
-        <nav className={classes.NavBar}>
-          <IconButton component={Link} to="/">
-            <ArrowBackIcon style={iconStyles} />
-          </IconButton>
-        </nav>
+        <Nav showSignIn={true}/>
         <main className={classes.GameContainer}>
           {this.state.isPlayerChoosing
             ? this.state.userTiles.map((tile, index) => {

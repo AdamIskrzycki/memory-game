@@ -10,12 +10,6 @@
     row-gap: 30px;
 }
 
-.NavBar {
-    display: flex;
-    justify-content: left;
-    padding: 10px;
-}
-
 .HomeButton {
     padding: 10px 20px;
     border-radius: 4px;

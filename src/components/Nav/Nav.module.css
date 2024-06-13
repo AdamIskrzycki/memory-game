@@ -1,0 +1,19 @@
+a {
+    text-decoration: none;
+}
+
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.SignInButton {
+    border-radius: 10px;
+    padding: 15px;
+    margin: auto 0;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #fff;
+    cursor: pointer;
+}

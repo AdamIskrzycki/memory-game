@@ -1,0 +1,38 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px
+}
+
+header {
+    font-size: 32px;
+}
+
+label {
+    margin: 25px 5px 0;
+    font-size: 20px;
+    text-align: left;
+}
+
+input {
+    height: 28px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.AuthContainer {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 10% auto;
+}
+
+a {
+    text-decoration: none;
+    color: #fff
+}
+
+.HasAccountLink {
+    margin-top: 20px;
+    font-weight: bold;
+}
