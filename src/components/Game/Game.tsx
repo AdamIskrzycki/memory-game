@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import classes from "./Game.module.css";
-import Tile from "../Game/Tile/Tile";
+import Tile from "./Tile/Tile";
 import _ from "lodash";
 import Modal from "./Modal/Modal";
 import Nav from '../Nav/Nav'
