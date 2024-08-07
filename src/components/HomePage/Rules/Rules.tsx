@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Rules.module.css';
 
-const Rules = () => {
+const Rules: React.FC = () => {
     return (
         <>
             <article className={classes.RulesContainer}>

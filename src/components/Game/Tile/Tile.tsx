@@ -1,19 +1,39 @@
-import React, { Component } from "react";
+import React from "react";
 import classes from "./Tile.module.css";
 
-class Tile extends Component {
-  render() {
-    const handleStyleChangeHover = (e) => {
-      e.target.style.cursor = "pointer";
+
+interface TileProps {
+  index: number,
+  isHighlighted: boolean,
+  onTileClick?: (index: number) => void
+}
+
+const Tile: React.FC<TileProps> = (props) => {
+  
+    const handleStyleChangeHover = (e: React.MouseEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLDivElement
+      target.style.cursor = "pointer";
+    };
+
+    const handleClick = () => { // this is done like that because of error below -> 
+      //props.onTileClick is expected to handle a number parameter, but the onClick event handler in React expects a function that takes a MouseEvent parameter.
+      //using intermediary functions is a common and practical approach to ensure type safety 
+      //and to adapt your function signatures to match the expected signatures of event handlers in React.
+
+      //in short - when an onClick or some other event expects certain Event type 
+      //and you need to pass a function with other return and parameter types - create intermediary functions like this handleClick() function
+      props.onTileClick!(props.index)
     };
 
     return (
       <div
-        className={this.props.isHighlighted ? classes.RandomTile : classes.Tile}
-        onClick={this.props.onTileClick ? this.props.onTileClick : null}
-        onMouseOver={this.props.onTileClick ? handleStyleChangeHover : null}
+        className={props.isHighlighted ? classes.RandomTile : classes.Tile}
+        onClick={handleClick}
+        // onMouseOver={props.onTileClick ? handleStyleChangeHover : null}
+        onMouseOver={handleStyleChangeHover}
       ></div>
     );
   }
-}
+
+
 export default Tile;

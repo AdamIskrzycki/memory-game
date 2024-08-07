@@ -1,93 +1,90 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import classes from "./Game.module.css";
 import Tile from "./Tile/Tile";
 import _ from "lodash";
 import Modal from "./Modal/Modal";
 import Nav from '../Nav/Nav'
 
-class Game extends Component {
-  numberOfTiles = 16;
+const Game: React.FC = () => {
 
-  state = {
-    renderingRandomTiles: false,
-    isPlayerChoosing: false,
-    randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
-    userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
-    openModal: false,
-    startTime: null,
-    endTime: null,
-  };
+    const numberOfTiles = 16;
 
-  render() {
-    
-    const tiles = [];
+    //const [renderingRandomTiles, setRenderingRandomTiles] = useState(false)
+    const [isPlayerChoosing, setIsPlayerChoosing] = useState(false)
+    const [randomTiles, setRandomTiles] = useState(Array(numberOfTiles).fill(false))
+    const [userTiles, setUserTiles] = useState((Array(numberOfTiles).fill(false)))
+    const [openModal, setOpenModal] = useState(false)
+    const [startTime, setStartTime] = useState<Date | null>(null)
+    const [endTime, setEndTime] = useState<Date | null>(null)
+
+
+    const tiles: React.ReactElement[] = [];
 
     const gameStartHandler = () => {
-      const array = _.range(this.numberOfTiles).map(
+      const array = randomTiles.map(
         (x) => (x = _.sample([true, false]))
       );
 
-      this.setState({ randomTiles: array });
+      setRandomTiles(array)
+
+      // setTimeout(() => {
+      //   setRenderingRandomTiles(true)
+      // }, 250);
 
       setTimeout(() => {
-        this.setState({ renderingRandomTiles: true });
-      }, 250);
-
-      setTimeout(() => {
-        this.setState({
-          renderingRandomTiles: false,
-          isPlayerChoosing: true,
-          startTime: new Date(),
-        });
+        //setRenderingRandomTiles(false)
+        setIsPlayerChoosing(true)
+        setStartTime(new Date())
       }, 750);
     };
 
-    const onTileClick = (index) => {
-      const newUserTiles = [...this.state.userTiles];
+    const onTileClick = (index: number) => {
+      const newUserTiles = [...userTiles];
 
       newUserTiles[index]
         ? (newUserTiles[index] = false)
         : (newUserTiles[index] = true);
 
-      this.setState({ userTiles: newUserTiles });
+      setUserTiles(newUserTiles)
 
-      if (_.isEqual(newUserTiles, this.state.randomTiles)) {
-        this.setState({ openModal: true, endTime: new Date() });
+      if (_.isEqual(newUserTiles, randomTiles)) {
+        setOpenModal(true)
+        setEndTime(new Date())
       }
     };
 
     const handleModalClose = () => {
-      this.setState({
-        openModal: false,
-        randomTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
-        userTiles: _.range(this.numberOfTiles).map((x) => (x = false)),
-        isPlayerChoosing: false,
-      });
+
+      setOpenModal(false)
+      setRandomTiles(Array(numberOfTiles).fill(false))
+      setUserTiles(Array(numberOfTiles).fill(false))
+      setIsPlayerChoosing(false)
     };
 
     return (
       <>
         <Nav showSignIn={true}/>
         <main className={classes.GameContainer}>
-          {this.state.isPlayerChoosing
-            ? this.state.userTiles.map((tile, index) => {
+          {isPlayerChoosing
+            ? userTiles.map((tile, index) => {
                 return tiles.concat(
                   <Tile
                     isHighlighted={tile}
+                    index={index}
                     key={index}
                     onTileClick={() => onTileClick(index)}
                   />
                 );
               })
-            : this.state.randomTiles.map((tile, index) => {
-                return tiles.concat(<Tile isHighlighted={tile} key={index} />);
+            : randomTiles.map((tile, index) => {
+                return tiles.concat(<Tile isHighlighted={tile} key={index} index={index}/>); 
               })}
         </main>
-        {this.state.openModal ? (
+        {openModal ? (
           <Modal
-            time={this.state.endTime - this.state.startTime}
+            time={+endTime! - +startTime!}
             handleClose={handleModalClose}
-            openModal={this.state.openModal}
+            openModal={openModal}
           />
         ) : null}
         <button className={classes.PlayButton} onClick={gameStartHandler}>
@@ -99,6 +96,5 @@ class Game extends Component {
       </>
     );
   }
-}
 
 export default Game;
