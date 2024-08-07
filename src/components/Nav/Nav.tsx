@@ -2,9 +2,14 @@ import React from "react";
 import classes from "./Nav.module.css";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { IconButton, Button } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 
-const Nav = (props) => {
+
+interface NavProps {
+  showSignIn: boolean,
+}
+
+const Nav: React.FC<NavProps> = (props) => {
   const iconStyles = {
     fontSize: "50px",
     cursor: "pointer",

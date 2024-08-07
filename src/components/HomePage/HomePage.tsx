@@ -9,7 +9,7 @@ import classes from "./HomePage.module.css";
 import Rules from "./Rules/Rules";
 import TitleBox from "./TitleBox/TitleBox";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   return (
     <main className={classes.HomePageContainer}>
       <TitleBox />

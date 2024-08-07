@@ -9,9 +9,9 @@ const SignUp = () => {
           <div className={classes.AuthContainer}>
             <header>Sign Up</header>
             <form>
-              <label for="email">E-mail</label>
+              <label htmlFor="email">E-mail</label>
               <input type="text" id="email" />
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input type="password" id="password" />
             </form>
     

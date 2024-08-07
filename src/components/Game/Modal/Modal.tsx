@@ -8,7 +8,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Modal = (props) => {
+interface ModalProps {
+    openModal: boolean,
+    handleClose: () => void,
+    time: number
+}
+
+const Modal: React.FC<ModalProps> = (props) => {
 
     const classes = useStyles();
 

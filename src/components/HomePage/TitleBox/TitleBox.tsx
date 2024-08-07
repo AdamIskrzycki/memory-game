@@ -5,7 +5,7 @@ import Title from './Title/Title';
 import classes from './TitleBox.module.css';
 import { Link } from 'react-router-dom';
 
-const TitleBox = () => {
+const TitleBox: React.FC = () => {
 
     const iconStyles = {
         fontSize: '150px',
